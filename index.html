@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UpscaleKit — AI Image Upscaler for Enlarging and Unblurring Photos</title>
+<meta name="description" content="UpscaleKit is a browser-based AI image upscaler. Upload a photo, compare SeedVR2 and Crystal model results, choose your output size, and pay only for the pixels you export.">
+<link rel="canonical" href="https://wentao-hu.github.io/upscalekit-official/">
+<meta property="og:title" content="UpscaleKit — AI Image Upscaler for Enlarging and Unblurring Photos">
+<meta property="og:description" content="Compare two upscaling models on your own image, see the price before processing, and pay with one-time credit packs.">
+<meta property="og:image" content="assets/hero.png">
+<meta property="og:type" content="website">
+<style>
+  :root{
+    --ink:#0f1d26; --muted:#4f6470; --line:#e2eaf0; --bg:#fbfdfe;
+    --accent:#0b7fa8; --accent-soft:#e6f4fa; --card:#ffffff;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.65;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);background:rgba(251,253,254,.92);position:sticky;top:0;z-index:10;backdrop-filter:blur(8px)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:700;font-size:19px;letter-spacing:-.02em}
+  .nav-links{display:flex;gap:22px;font-size:14px;color:var(--muted)}
+  .nav-links a{color:var(--muted)}
+  .hero{padding:64px 0 40px;text-align:center}
+  .eyebrow{display:inline-block;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--accent);background:var(--accent-soft);padding:6px 12px;border-radius:999px;margin-bottom:20px}
+  h1{font-size:clamp(30px,5vw,46px);line-height:1.15;letter-spacing:-.03em;margin:0 0 18px}
+  .lede{font-size:18px;color:var(--muted);max-width:660px;margin:0 auto 28px}
+  .cta{display:inline-block;background:var(--ink);color:#fff;font-weight:600;padding:14px 26px;border-radius:10px;font-size:15px}
+  .cta:hover{text-decoration:none;opacity:.88}
+  .shot{width:100%;border-radius:14px;border:1px solid var(--line);margin-top:38px;box-shadow:0 18px 50px rgba(15,29,38,.10)}
+  section{padding:56px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;margin:0 0 16px}
+  h3{font-size:17px;margin:26px 0 8px}
+  p{color:var(--muted);margin:0 0 16px;font-size:16px}
+  .grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:28px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:22px}
+  .card h3{margin:0 0 8px;font-size:16px;color:var(--ink)}
+  .card p{margin:0;font-size:14.5px}
+  .features{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+  .steps{margin-top:26px}
+  .step{display:flex;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .step:last-child{border-bottom:none}
+  .num{flex:0 0 32px;height:32px;border-radius:50%;background:var(--accent-soft);color:var(--accent);
+    font-weight:700;display:grid;place-items:center;font-size:14px}
+  .step h3{margin:0 0 4px;font-size:16px}
+  .step p{margin:0;font-size:14.5px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:600;font-size:15.5px;color:var(--ink);list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"+";color:var(--accent);font-weight:700;margin-right:10px}
+  details[open] summary::before{content:"−"}
+  details p{margin:12px 0 0;font-size:14.5px}
+  .note{background:var(--accent-soft);border-radius:12px;padding:20px 22px;margin-top:28px;font-size:14.5px;color:var(--muted)}
+  .note strong{color:var(--ink)}
+  table{width:100%;border-collapse:collapse;margin-top:24px;font-size:15px}
+  th,td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600}
+  td{color:var(--muted)}
+  td strong{color:var(--ink)}
+  footer{border-top:1px solid var(--line);padding:34px 0 50px;font-size:14px;color:var(--muted)}
+  .foot-links{display:flex;flex-wrap:wrap;gap:18px;margin-bottom:14px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand">UpscaleKit</div>
+    <nav class="nav-links">
+      <a href="#what">What it is</a>
+      <a href="#models">Models</a>
+      <a href="#features">Features</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+      <a href="https://upscalekit.net/">Open the tool</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <span class="eyebrow">Official product page</span>
+    <h1>Enlarge and unblur photos with an AI upscaler you can compare before you pay</h1>
+    <p class="lede">UpscaleKit runs two upscaling models on your own image, shows you the results side by side, and prices each export by output size. One-time credit packs start at $5.00 — no subscription.</p>
+    <a class="cta" href="https://upscalekit.net/">Try it on upscalekit.net</a>
+    <img class="shot" src="assets/hero.png" alt="UpscaleKit AI image upscaler landing page">
+  </div>
+
+  <section id="what">
+    <div class="wrap">
+      <h2>What is UpscaleKit?</h2>
+      <p>UpscaleKit is a browser-based AI image upscaler. You upload a photo, pick an output size, and the tool reconstructs detail that the original resolution could not hold. It handles the two problems people usually run into with small images: they are too small for where they need to go, and they are soft or blurry in ways that simple resizing makes worse.</p>
+      <p>The part that separates it from most upscalers is the comparison step. Rather than committing to one model and hoping, UpscaleKit exposes the sample results first. You can look at how different models handle the same image — how much they sharpen, how much texture they invent, how they treat faces versus landscapes — and then decide which output is worth paying for. The price is shown before processing, calculated from the output size you selected.</p>
+      <p>Billing is per export. There is no monthly plan and no recurring charge. You buy a credit pack once, spend it on the images you actually want, and the credits stay in your account until used. Failed generations are returned to your balance rather than consumed.</p>
+      <p>This matters more than it sounds for a tool like this. Upscaling is inherently a guessing game: the model has to invent plausible detail that was never in the file. Two models can produce very different results on the same photo, and which one is better depends on whether you are enlarging a portrait, a product shot, a screenshot or an old family photo. Letting you see the difference before paying turns that guess into a choice.</p>
+      <div class="note">
+        <strong>What it cannot do.</strong> An upscaler cannot recover information that was never captured. If a face is turned away, badly motion-blurred, or compressed into blocks, the model will produce something plausible rather than something true. Treat the output as a clean approximation, not a restoration of the original scene.
+      </div>
+    </div>
+  </section>
+
+  <section id="models">
+    <div class="wrap">
+      <h2>Two models, different strengths</h2>
+      <p>UpscaleKit exposes more than one upscaling model because no single model wins on every image. The comparison view lets you run the same photo through each and judge the output directly.</p>
+      <table>
+        <thead><tr><th>Model</th><th>Character</th><th>Where it tends to do well</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><strong>SeedVR2</strong></td>
+            <td>Video-derived restoration model; strong on compression artefacts and soft edges</td>
+            <td>Old photos, screenshots, images with visible compression blocks</td>
+          </tr>
+          <tr>
+            <td><strong>Crystal</strong></td>
+            <td>Detail-oriented upscaler; pushes texture and micro-contrast further</td>
+            <td>Product shots, textures, images where sharpness matters more than fidelity</td>
+          </tr>
+        </tbody>
+      </table>
+      <p style="margin-top:20px">Neither is universally better. Crystal can look over-sharpened on skin; SeedVR2 can look soft on fine product detail. Running both on your specific image is the fastest way to decide.</p>
+      <img class="shot" src="assets/steps.png" alt="UpscaleKit upload and output configuration">
+    </div>
+  </section>
+
+  <section id="how">
+    <div class="wrap">
+      <h2>How it works</h2>
+      <div class="steps">
+        <div class="step"><div class="num">1</div><div><h3>Upload your image</h3><p>Drop in a JPEG, PNG or WebP. The tool reads the original dimensions and shows what each output size will cost before you commit.</p></div></div>
+        <div class="step"><div class="num">2</div><div><h3>Pick a scale, format and model</h3><p>Choose the target size and output format, then compare sample results across the available models on your own image.</p></div></div>
+        <div class="step"><div class="num">3</div><div><h3>Export what you need</h3><p>Spend credits only on the renders you want to keep. Credits remain in your account, and failed generations are refunded.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <h2>Features</h2>
+      <div class="grid features">
+        <div class="card">
+          <h3>Model comparison first</h3>
+          <p>See sample outputs from different models before spending credits, so the choice is based on your image rather than a marketing claim.</p>
+        </div>
+        <div class="card">
+          <h3>Price shown before processing</h3>
+          <p>The cost of each export is calculated from the output size you select and displayed up front.</p>
+        </div>
+        <div class="card">
+          <h3>One-time credit packs</h3>
+          <p>Packs start at $5.00. No subscription, no monthly renewal, and credits do not expire.</p>
+        </div>
+        <div class="card">
+          <h3>Multiple output formats</h3>
+          <p>Export to the format your workflow needs, including formats with transparency support.</p>
+        </div>
+        <div class="card">
+          <h3>Browser-based</h3>
+          <p>No desktop install and no mobile app. Works in a modern browser on desktop and phone.</p>
+        </div>
+        <div class="card">
+          <h3>Failed renders refunded</h3>
+          <p>If a generation fails, the credits go back to your balance rather than being consumed.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <div class="wrap">
+      <h2>Pricing</h2>
+      <p>UpscaleKit prices by output size rather than by a flat per-image rate, because a 4× enlargement costs more compute than a 2× one. You see the exact price for your selected size before pressing generate.</p>
+      <table>
+        <thead><tr><th>Pack</th><th>Best for</th><th>Billing</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Starter</strong></td><td>Trying the tool on a few images</td><td>One-time, from $5.00</td></tr>
+          <tr><td><strong>Standard</strong></td><td>Regular use on product or portrait photos</td><td>One-time</td></tr>
+          <tr><td><strong>Large</strong></td><td>Batch work and larger output sizes</td><td>One-time</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-top:20px">Current pack sizes and per-pixel rates are listed on the pricing section of the main site. Credits are non-expiring and failed generations are refunded.</p>
+      <img class="shot" src="assets/pricing.png" alt="UpscaleKit one-time credit pack pricing">
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Frequently asked questions</h2>
+      <details open>
+        <summary>Is there a subscription?</summary>
+        <p>No. UpscaleKit sells one-time credit packs. Credits stay in your account and are spent per export.</p>
+      </details>
+      <details>
+        <summary>How is the price calculated?</summary>
+        <p>By output size. A larger enlargement costs more because it requires more processing. The exact price for your selected size is shown before you generate.</p>
+      </details>
+      <details>
+        <summary>Which model should I use?</summary>
+        <p>It depends on the image. SeedVR2 tends to handle compression artefacts and soft edges well; Crystal pushes more detail and texture. Run both on a sample and compare.</p>
+      </details>
+      <details>
+        <summary>What file types are supported?</summary>
+        <p>Common web image formats including JPEG, PNG and WebP. Supported formats and size limits are listed on the upload page.</p>
+      </details>
+      <details>
+        <summary>Can it fix a badly blurred photo?</summary>
+        <p>Partially. It can sharpen softness and reconstruct plausible detail, but it cannot recover information that was never captured — for example a face turned away from the camera or heavy motion blur.</p>
+      </details>
+      <details>
+        <summary>What happens to my uploaded images?</summary>
+        <p>Images are processed to generate your output and are handled according to the privacy policy on upscalekit.net. Contact support for deletion requests.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>About this repository</h2>
+      <p>This GitHub Pages site is the official public product page for UpscaleKit. It publishes a description of the product, its models and pricing model, plus contact details. It does not contain the website's source code, generation pipeline or deployment configuration — the application repository is private.</p>
+      <p>Nothing on this page implies that UpscaleKit is open source.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-links">
+      <a href="https://upscalekit.net/">Main website</a>
+      <a href="https://upscalekit.net/privacy-policy">Privacy policy</a>
+      <a href="https://upscalekit.net/terms-of-service">Terms of service</a>
+      <a href="https://upscalekit.net/refund-policy">Refund policy</a>
+      <a href="mailto:support@upscalekit.net">support@upscalekit.net</a>
+    </div>
+    <p>UpscaleKit is an independent browser-based AI image upscaler. Outputs are AI-generated approximations and should be treated as such.</p>
+  </div>
+</footer>
+</body>
+</html>
